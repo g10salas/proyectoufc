@@ -1,0 +1,120 @@
+-- 1. Tabla de Eventos (4 columnas exactas)
+CREATE TABLE Events (
+    event_id VARCHAR PRIMARY KEY,
+    name VARCHAR,
+    event_date DATE,
+    location VARCHAR
+);
+
+-- 2. Tabla de Peleadores (11 columnas exactas)
+CREATE TABLE Fighters (
+    full_name VARCHAR,
+    fighter_id VARCHAR PRIMARY KEY,
+    nickname VARCHAR,
+    ht VARCHAR,
+    wt VARCHAR,
+    reach VARCHAR,
+    stance VARCHAR,
+    w INTEGER,
+    l INTEGER,
+    d INTEGER,
+    belt VARCHAR
+);
+
+-- 3. Tabla de Estadísticas de Peleadores (37 columnas exactas)
+CREATE TABLE Fighters_Stats (
+    fighter_id VARCHAR PRIMARY KEY,
+    full_name VARCHAR,
+    nickname VARCHAR,
+    ht VARCHAR,
+    wt VARCHAR,
+    stance VARCHAR,
+    w INTEGER,
+    l INTEGER,
+    d INTEGER,
+    belt VARCHAR,
+    round_avg VARCHAR,
+    avg_fight_time VARCHAR,
+    kd FLOAT,
+    str FLOAT,
+    td FLOAT,
+    sub FLOAT,
+    ctrl VARCHAR,
+    sig_str_pct VARCHAR,
+    head_pct VARCHAR,
+    body_pct VARCHAR,
+    leg_pct VARCHAR,
+    distance_pct VARCHAR,
+    clinch_pct VARCHAR,
+    ground_pct VARCHAR,
+    sub_att FLOAT,
+    rev FLOAT,
+    weight_class VARCHAR,
+    gender VARCHAR,
+    dec_count INTEGER,
+    ko_rate VARCHAR,
+    sub_rate VARCHAR,
+    dec_rate VARCHAR,
+    fighting_style VARCHAR,
+    striker_membership FLOAT,
+    wrestler_membership FLOAT,
+    hybrid_membership FLOAT,
+    nostyle_membership FLOAT,
+    
+    FOREIGN KEY (fighter_id) REFERENCES Fighters(fighter_id)
+);
+
+-- 4. Tabla de Combates (47 columnas exactas)
+-- Esta es la "Tabla de Hechos", el corazón del análisis de métodos de victoria
+CREATE TABLE Fights (
+    fight_id VARCHAR PRIMARY KEY,
+    fighter_id_1 VARCHAR,
+    fighter_id_2 VARCHAR,
+    fighter_1 VARCHAR,
+    fighter_2 VARCHAR,
+    kd_1 FLOAT,
+    kd_2 FLOAT,
+    str_1 FLOAT,
+    str_2 FLOAT,
+    td_1 FLOAT,
+    td_2 FLOAT,
+    sub_1 FLOAT,
+    sub_2 FLOAT,
+    weight_class VARCHAR,
+    method VARCHAR,
+    round_num INTEGER,
+    fight_time VARCHAR,
+    event_id VARCHAR,
+    result_1 VARCHAR,
+    result_2 VARCHAR,
+    time_format VARCHAR,
+    referee VARCHAR,
+    method_details VARCHAR,
+    sig_str_pct_1 VARCHAR,
+    sig_str_pct_2 VARCHAR,
+    sub_att_1 FLOAT,
+    sub_att_2 FLOAT,
+    rev_1 FLOAT,
+    rev_2 FLOAT,
+    ctrl_1 VARCHAR,
+    ctrl_2 VARCHAR,
+    head_pct_1 VARCHAR,
+    head_pct_2 VARCHAR,
+    body_pct_1 VARCHAR,
+    body_pct_2 VARCHAR,
+    leg_pct_1 VARCHAR,
+    leg_pct_2 VARCHAR,
+    distance_pct_1 VARCHAR,
+    distance_pct_2 VARCHAR,
+    clinch_pct_1 VARCHAR,
+    clinch_pct_2 VARCHAR,
+    ground_pct_1 VARCHAR,
+    ground_pct_2 VARCHAR,
+    total_str_pct_1 VARCHAR,
+    total_str_pct_2 VARCHAR,
+    sig_str_pct_1_alt VARCHAR, 
+    sig_str_pct_2_alt VARCHAR,
+
+    -- Conexiones con las otras tablas
+    FOREIGN KEY (event_id) REFERENCES Events(event_id)
+);
