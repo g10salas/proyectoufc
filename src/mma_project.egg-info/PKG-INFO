@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: mma_project
+Version: 0.1.0
+Summary: Análisis de métodos de victoria por categoría de peso en MMA
+Requires-Dist: pandas<3,>=2.0.0
+Requires-Dist: numpy<2,>=1.24.0
+Requires-Dist: matplotlib<4,>=3.10
+Requires-Dist: ipykernel<7,>=6.0
+Requires-Dist: scipy<2,>=1.10
+Requires-Dist: scikit-learn<2,>=1.2
+Requires-Dist: pyarrow<16,>=15.0
+Requires-Dist: SQLAlchemy<3,>=2.0
+Requires-Dist: duckdb>=0.10.0
+Requires-Dist: duckdb-engine
