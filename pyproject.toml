@@ -5,20 +5,39 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mma_project"
 version = "0.1.0"
-description = "Análisis de métodos de victoria por categoría de peso en MMA"
+description = "Análisis avanzado de datos de la UFC con arquitectura ELT"
+readme = "README.md"
+requires-python = ">=3.11"
 dependencies = [
-    "pandas>=2.0.0,<3",
-    "numpy>=1.24.0,<2",
-    "matplotlib>=3.10,<4",
-    "ipykernel>=6.0,<7",
-    "scipy>=1.10,<2",
-    "scikit-learn>=1.2,<2",
-    "pyarrow>=15.0,<16",
-    "SQLAlchemy>=2.0,<3",
+    # Dependencias exactas de la rúbrica
+    "pandas>=3.0",
+    "numpy>=2.4",
+    "scikit-learn>=1.8",
+    "matplotlib>=3.10",
+    "openpyxl>=3.1",
+    "xlrd>=2.0",
+    "pyarrow>=23.0",
+    # Nuestras dependencias base para la BD
+    "SQLAlchemy>=2.0",
     "duckdb>=0.10.0",
-    "duckdb-engine"
+    "duckdb-engine", # Para que corran los Jupyter Notebooks
+    "ipykernel",
+    "seaborn>=0.13.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Herramientas de calidad exigidas
+    "pytest>=7.0",
+    "pytest-cov",
+    "ruff>=0.1",
+    "mypy>=1.0"
 ]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-exclude = ["tests", "scripts", "notebooks"]
+exclude = ["tests", "01-scripts", "99-notebooks"]
+
+# Configuración básica para el formateador de código
+[tool.ruff]
+line-length = 88

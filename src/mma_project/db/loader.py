@@ -1,8 +1,7 @@
 from pathlib import Path
 from sqlalchemy import text
 
-# Apuntamos a la carpeta donde estarán los scripts DDL y DML
-SQL_DIR = Path("01-scripts")
+SQL_DIR = Path(__file__).parent.parent.parent.parent / "01-scripts"
 
 def load_sql(query_path: str) -> text:
     """Lee un archivo .sql y regresa el texto listo para SQLAlchemy
@@ -17,4 +16,5 @@ def load_sql(query_path: str) -> text:
     if not full_path.exists():
         raise FileNotFoundError(f"Archivo SQL no encontrado: {full_path}")
         
-    return text(full_path.read_text())
+    # Agregamos encoding='utf-8' para evitar problemas con acentos y caracteres especiales
+    return text(full_path.read_text(encoding='utf-8'))
