@@ -2,6 +2,13 @@
 
 Este repositorio contiene la arquitectura de datos, los scripts de preprocesamiento y los módulos de conexión necesarios para reproducir el análisis estadístico sobre cómo las diferentes categorías de peso en la UFC impactan la probabilidad de victorias por KO/TKO frente a Sumisiones.
 
+## 🎯 Objetivo de Investigación
+Este proyecto utiliza bases de datos relacionales para responder a la siguiente pregunta analítica:
+
+> **¿Cómo cambia la proporción de victorias por Nocaut (KO/TKO) frente a Sumisiones dependiendo de la categoría de peso, y qué división tiene el mayor porcentaje de peleas que llegan hasta la decisión de los jueces?**
+
+A través de esta base de datos, buscamos comprobar estadísticamente si el peso y la complexión de los atletas determinan el estilo de finalización en los combates de Artes Marciales Mixtas.
+
 ## 👥 Equipo de Trabajo (Manejo de Datos)
 * Gilberto Salas Camarillo
 * [Nombre del Integrante 2]
