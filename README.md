@@ -1,60 +1,30 @@
-# Proyecto Final: Análisis de Métodos de Victoria en la UFC
+# 🥊 Proyecto UFC: Análisis Estadístico de Métodos de Victoria
 
-Este repositorio contiene la arquitectura de datos, los scripts de preprocesamiento y los módulos de conexión necesarios para reproducir el análisis estadístico sobre cómo las diferentes categorías de peso en la UFC impactan la probabilidad de victorias por KO/TKO frente a Sumisiones.
+Bienvenido a **proyectoufc**, un proyecto de análisis de datos e ingeniería ELT (Extract, Load, Transform) diseñado para procesar el histórico de combates de la Ultimate Fighting Championship (UFC) y responder matemáticamente a preguntas clave sobre el rendimiento de los atletas según su división de peso.
 
-## 🎯 Objetivo de Investigación
-Este proyecto utiliza bases de datos relacionales para responder a la siguiente pregunta analítica:
+## 🎯 Pregunta de Investigación
 
-> **¿Cómo cambia la proporción de victorias por Nocaut (KO/TKO) frente a Sumisiones dependiendo de la categoría de peso, y qué división tiene el mayor porcentaje de peleas que llegan hasta la decisión de los jueces?**
+Este proyecto fue construido para dar respuesta estructurada a la siguiente pregunta detonadora:
 
-A través de esta base de datos, buscamos comprobar estadísticamente si el peso y la complexión de los atletas determinan el estilo de finalización en los combates de Artes Marciales Mixtas.
+> *"¿Cómo cambia la proporción de victorias por Nocaut (KO/TKO) frente a Sumisiones dependiendo de la categoría de peso, y qué división tiene el mayor porcentaje de peleas que llegan hasta la decisión de los jueces?"*
 
-## 👥 Equipo de Trabajo (Manejo de Datos)
-* Gilberto Salas Camarillo
-* [Nombre del Integrante 2]
-* [Nombre del Integrante 3]
+## 🛠️ Tecnologías y Arquitectura
 
-## 🛠️ Requisitos Técnicos
-El proyecto está diseñado para ejecutarse dentro de un entorno de **GitHub Codespaces**, garantizando la misma configuración para todos los colaboradores y eliminando errores de compatibilidad.
-* **Motor de Base de Datos:** DuckDB (v0.10.0+)
-* **Lenguaje:** Python 3.x
-* **Librerías Principales:** Pandas, SQLAlchemy, DuckDB-Engine
+Para evitar el procesamiento pesado en memoria, este proyecto utiliza un enfoque **ELT**:
+* **DuckDB:** Motor analítico principal para la limpieza, cruce y cálculo de variables (como el diferencial de golpes y agrupación de métodos de victoria) usando SQL directamente sobre los archivos fuente.
+* **Python (Pandas/Seaborn):** Utilizado exclusivamente para la orquestación, extracción final de reportes agregados y visualización de datos.
+* **uv:** Gestor de paquetes ultrarrápido para garantizar un entorno reproducible.
 
 ## 📂 Estructura del Repositorio
-Para garantizar la modularidad, el código está organizado de la siguiente manera:
-* `00-data/raw/`: Datasets históricos en formato `.csv` (intocables, preservando su estado original).
-* `01-scripts/`: Scripts `.sql` con instrucciones DDL (Creación de tablas) y DML (Ingesta masiva).
-* `src/mma_project/db/`: Módulos de Python para la conexión a la base de datos mediante SQLAlchemy.
-* `notebooks/`: Libretas de Jupyter para el análisis exploratorio y la visualización final de resultados.
 
-## 🚀 Instrucciones de Reproducibilidad
+El proyecto sigue una estructura profesional de ciencia de datos:
 
-Para reconstruir la base de datos relacional `mma_database.duckdb` desde cero, abre la terminal en la raíz del proyecto y sigue estos pasos en orden estricto:
-
-**1. Inicializar el entorno de Python**
-Asegúrate de tener instaladas las dependencias y el paquete del proyecto configurados en el archivo `pyproject.toml`:
-```bash
-pip install -e .
-```
-
-**2. Crear la Estructura de la Base de Datos (DDL)**
-Ejecuta el script de inicialización para crear las tablas vacías (`Events`, `Fighters`, `Fighters_Stats`, `Fights`) con sus llaves primarias.
-```bash
-duckdb 00-data/mma_database.duckdb < 01-scripts/01-init-db.sql
-```
-
-**3. Ingesta Masiva de Datos (DML)**
-Carga los datos crudos desde la carpeta `raw/` hacia las tablas utilizando el comando `COPY` de DuckDB para una lectura de alto rendimiento.
-```bash
-duckdb 00-data/mma_database.duckdb < 01-scripts/02-insert-initial-data.sql
-```
-
-## 📊 Verificación Rápida
-Una vez ejecutados los scripts, puedes abrir la consola interactiva desde la terminal:
-```bash
-duckdb 00-data/mma_database.duckdb
-```
-Y verificar el total de combates registrados en la tabla de hechos con la siguiente consulta:
-```sql
-SELECT COUNT(*) AS total_peleas FROM Fights;
-```
+* `00-data/`: Contiene los datos crudos (`raw/`) y el reporte estadístico final generado (`processed/reporte_divisiones.csv`).
+* `01-scripts/`: Consultas SQL y scripts de calidad de datos para inicializar el motor DuckDB.
+* `02-docs/`: Documentación fundamental del proyecto.
+  * `arquitectura.md`: Explicación del modelo ELT.
+  * `diccionario_datos.md`: Metadatos de las variables analizadas.
+  * `guia_instalacion.md`: Pasos para reproducir el entorno.
+  * `images/`: Gráficas generadas para la presentación final.
+* `src/mma_project/`: Módulo instalable de Python. Contiene `data/loader.py` para la resolución dinámica de rutas absolutas y conexión segura a la base de datos.
+*
